@@ -55,6 +55,10 @@ This will create a `dist/` directory and output results in it. There will be a `
    python struct_excel/main.py --src /path/to/source/excel
    ```
 
+## Documentation
+
+All documentations are available under the [`docs/`](docs/) folder.
+
 ## Development
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
