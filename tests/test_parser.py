@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from struct_excel.models import PaymentStatus, SessionMode
+from struct_excel.models import PaymentStatus, CourseSessionMode
 from struct_excel.parser import (
     parse_bool_schema,
     parse_course_session,
@@ -14,7 +14,7 @@ class TestParseCourseSession:
 
         assert result.course_name == "Python Basics"
         assert result.duration == 2.0
-        assert result.mode == SessionMode.OFFLINE
+        assert result.mode == CourseSessionMode.OFFLINE
         assert result.datetime_range == [(datetime(2026, 2, 10), datetime(2026, 2, 10))]
 
     def test_parse_with_online(self):
@@ -22,14 +22,14 @@ class TestParseCourseSession:
 
         assert result.course_name == "Python Basics"
         assert result.duration == 2.0
-        assert result.mode == SessionMode.ONLINE
+        assert result.mode == CourseSessionMode.ONLINE
 
     def test_parse_with_offline(self):
         result = parse_course_session("Feb 10 2026 | [Offline] Python Basics [2hr]")
 
         assert result.course_name == "[Offline] Python Basics"
         assert result.duration == 2.0
-        assert result.mode == SessionMode.OFFLINE
+        assert result.mode == CourseSessionMode.OFFLINE
 
     def test_parse_date_range(self):
         result = parse_course_session(
@@ -71,7 +71,7 @@ class TestParseCourseSession:
 
         assert result.course_name == "Cybersecurity Tools"
         assert result.duration == 3.0
-        assert result.mode == SessionMode.ONLINE
+        assert result.mode == CourseSessionMode.ONLINE
 
     def test_parse_hour_format_no_hr(self):
         result = parse_course_session("Feb 10 2026 | Python Basics [2]")
@@ -97,7 +97,7 @@ class TestParseCourseSession:
         }
         assert result.course_name == "PECB CISO"
         assert result.duration == 0.0
-        assert result.mode == SessionMode.OFFLINE
+        assert result.mode == CourseSessionMode.OFFLINE
 
 
 class TestParseBoolSchema:
