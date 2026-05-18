@@ -13,11 +13,13 @@
     devShells.${system}.default = pkgs.mkShell {
       # Add packages here.
       buildInputs = with pkgs; [
-        python313
         (pkgs.python3.withPackages (python-pkgs:
           with python-pkgs; [
             # Python packages:
           ]))
+        litecli
+        python313
+        sqlite
       ];
 
       # Shell hooks.
