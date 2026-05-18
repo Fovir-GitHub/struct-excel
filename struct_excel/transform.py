@@ -1,7 +1,3 @@
-# TODO: Add transformation for `student`,
-# `course`, `session`, `supervisor`,
-# and `enrollment`.
-
 import logging
 from struct_excel.models import (
     Course,
