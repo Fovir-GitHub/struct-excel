@@ -3,7 +3,14 @@
 # and `enrollment`.
 
 import logging
-from struct_excel.models import Course, Enrollment, RawRow, Session, Student, Supervisor
+from struct_excel.models import (
+    Course,
+    Enrollment,
+    RawRow,
+    CourseSession,
+    Student,
+    Supervisor,
+)
 from struct_excel.parser import (
     parse_bool_schema,
     parse_course_session,
@@ -105,8 +112,8 @@ def to_student(raw: list[RawRow], supervisors: list[Supervisor]) -> list[Student
     return students
 
 
-def to_session(raw: list[RawRow], courses: list[Course]) -> list[Session]:
-    sessions: list[Session] = []
+def to_session(raw: list[RawRow], courses: list[Course]) -> list[CourseSession]:
+    sessions: list[CourseSession] = []
     session_id = 1
     seen = set()
 
@@ -130,7 +137,7 @@ def to_session(raw: list[RawRow], courses: list[Course]) -> list[Session]:
             seen.add(dedup_key)
 
             sessions.append(
-                Session(
+                CourseSession(
                     session_id=session_id,
                     course_id=existed_course.course_id,
                     start_datetime=start,
@@ -148,7 +155,7 @@ def to_enrollment(
     raw: list[RawRow],
     students: list[Student],
     courses: list[Course],
-    sessions: list[Session],
+    sessions: list[CourseSession],
 ) -> list[Enrollment]:
     student_id_by_email = {student.email: student.student_id for student in students}
     course_id_by_name = {course.course_name: course.course_id for course in courses}

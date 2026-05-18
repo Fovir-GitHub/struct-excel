@@ -3,7 +3,7 @@ import calendar
 import re
 from struct_excel.models import (
     CourseParseResult,
-    SessionMode,
+    CourseSessionMode,
     Gender,
     Sector,
     PaymentStatus,
@@ -103,10 +103,10 @@ def _parse_course_name_duration(right_part: str) -> tuple[str, float]:
     return course_name, duration
 
 
-def _parse_mode(raw: str) -> SessionMode:
+def _parse_mode(raw: str) -> CourseSessionMode:
     if "[online]" in raw.lower():
-        return SessionMode.ONLINE
-    return SessionMode.OFFLINE
+        return CourseSessionMode.ONLINE
+    return CourseSessionMode.OFFLINE
 
 
 def _parse_datetime(left_part: str) -> list[tuple[datetime, datetime]]:
